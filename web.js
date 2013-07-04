@@ -1,6 +1,22 @@
-#!/usr/bin/env node
+function listPrimes(num) {
+    var primes = [];
+    for(var n = 2;  num > 0;  n++) {
+        if(isPrime(n)) {
+            primes.push(n);
+            --num;
+        }
+    }
+    return primes;
+}
+
+function isPrime(n) {
+    var max = Math.sqrt(n);
+    for(var i = 2;  i <= max;  i++) {
+        if( n % i === 0 )
+            return false;
+    }
+    return true;
+}
+
 var fs = require('fs');
-var outfile = "hello.txt";
-var out = "Modify this script to write out something different.\n";
-fs.writeFileSync(outfile, out);  
-console.log("Script: " + __filename + "\nWrote: " + out + "To: " + outfile);
+fs.writeFileSync('primes.txt', listPrimes(100));
